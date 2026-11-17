@@ -77,6 +77,14 @@ h2 .cnt{font-size:12px;color:var(--sub);letter-spacing:0;font-weight:400}
 }
 .ms .m.done{background:var(--resting-bg);border-color:#cfe3d4;color:#2f6b40}
 .ms .m.doing{background:var(--waiting-bg);border-color:#edd9a8;color:#8a5a06}
+.ms-fold{margin-top:10px}
+.ms-fold summary{cursor:pointer;list-style:none;display:inline-flex;align-items:center;gap:6px;
+  font-size:12px;color:var(--sub);padding:3px 12px;border:1px solid var(--line);border-radius:999px;background:#faf7f0}
+.ms-fold summary::-webkit-details-marker{display:none}
+.ms-fold summary:before{content:"▸";font-size:10px;transition:transform .15s}
+.ms-fold[open] summary:before{transform:rotate(90deg)}
+.ms-fold summary:hover{border-color:#d9cbb2;color:#6b5626}
+.ms-fold .ms{margin-top:10px}
 .ms .m i{font-style:normal;font-size:11px;opacity:.85}
 .goal .foot{margin-top:14px;font-size:11.5px;color:var(--sub)}
 
@@ -364,24 +372,25 @@ var QUERY = "", DAY = "";
   /* ---------- goal ---------- */
   (function(){
     var mss = goal.milestones || [];
-    var done = mss.filter(function(m){ return m.state === "done"; }).length;
-    var pct = mss.length ? Math.round(done / mss.length * 100) : 0;
     var h = '<div class="card goal">';
     h += '<div class="tag">GOAL · 项目最终目标</div>';
     if (goal.title) h += '<h1>' + esc(goal.title) + '</h1>';
     else h += '<h1 class="empty">目标待补充：agent 需向用户确认项目最终目标后写入</h1>';
     if (goal.detail) h += '<p class="detail">' + esc(goal.detail) + '</p>';
     if (mss.length) {
-      h += '<div class="ratio"><div class="bar"><i style="width:' + pct + '%"></i></div>';
-      h += '<span>里程碑 ' + done + '/' + mss.length + ' · ' + pct + '%</span></div>';
-      h += '<div class="ms">';
-      mss.forEach(function(m, i){
+      var open = mss.filter(function(m){ return (m.state || "todo") !== "done"; });
+      var closed = mss.filter(function(m){ return m.state === "done"; });
+      function chip(m){
         var st = m.state || "todo";
         var mark = st === "done" ? "✓" : (st === "doing" ? "◐" : "○");
-        h += '<span class="m ' + esc(st) + '" title="' + (st === "done" ? "已完成" : st === "doing" ? "进行中" : "未开始") + '">' +
-             '<i>' + mark + '</i>' + esc(m.text) + '</span>';
-      });
-      h += '</div>';
+        return '<span class="m ' + esc(st) + '" title="' + (st === "done" ? "已完成" : st === "doing" ? "进行中" : "未开始") + '">' +
+               '<i>' + mark + '</i>' + esc(m.text) + '</span>';
+      }
+      if (open.length) h += '<div class="ms">' + open.map(chip).join("") + '</div>';
+      if (closed.length) {
+        h += '<details class="ms-fold"><summary>已完成 ' + closed.length + ' 项</summary>' +
+             '<div class="ms">' + closed.map(chip).join("") + '</div></details>';
+      }
     }
     var by = goal.updatedBy ? (agentOf(goal.updatedBy) ? agentOf(goal.updatedBy).name : goal.updatedBy) : "";
     if (goal.updatedAt || by) {

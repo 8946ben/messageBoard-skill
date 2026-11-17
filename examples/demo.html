@@ -77,6 +77,14 @@ h2 .cnt{font-size:12px;color:var(--sub);letter-spacing:0;font-weight:400}
 }
 .ms .m.done{background:var(--resting-bg);border-color:#cfe3d4;color:#2f6b40}
 .ms .m.doing{background:var(--waiting-bg);border-color:#edd9a8;color:#8a5a06}
+.ms-fold{margin-top:10px}
+.ms-fold summary{cursor:pointer;list-style:none;display:inline-flex;align-items:center;gap:6px;
+  font-size:12px;color:var(--sub);padding:3px 12px;border:1px solid var(--line);border-radius:999px;background:#faf7f0}
+.ms-fold summary::-webkit-details-marker{display:none}
+.ms-fold summary:before{content:"▸";font-size:10px;transition:transform .15s}
+.ms-fold[open] summary:before{transform:rotate(90deg)}
+.ms-fold summary:hover{border-color:#d9cbb2;color:#6b5626}
+.ms-fold .ms{margin-top:10px}
 .ms .m i{font-style:normal;font-size:11px;opacity:.85}
 .goal .foot{margin-top:14px;font-size:11.5px;color:var(--sub)}
 
@@ -268,11 +276,11 @@ footer{max-width:1120px;margin:0 auto;padding:0 24px 40px;font-size:11.5px;color
 {
   "schema": "message-board/1",
   "project": {
-    "name": "mbdemo",
+    "name": "mbdemo2",
     "file": "留言板.html",
-    "root": "C:\\Users\\ben\\AppData\\Local\\Temp\\mbdemo",
-    "created": "2026-11-17T12:14:55+08:00",
-    "updated": "2026-11-17T12:14:56+08:00"
+    "root": "C:\\Users\\ben\\AppData\\Local\\Temp\\mbdemo2",
+    "created": "2026-11-17T12:17:17+08:00",
+    "updated": "2026-11-17T12:17:17+08:00"
   },
   "goal": {
     "title": "上线一个可用 7 天的本地天气看板",
@@ -294,7 +302,7 @@ footer{max-width:1120px;margin:0 auto;padding:0 24px 40px;font-size:11.5px;color
         "state": "todo"
       }
     ],
-    "updatedAt": "2026-11-17T12:14:56+08:00",
+    "updatedAt": "2026-11-17T12:17:17+08:00",
     "updatedBy": ""
   },
   "lock": {
@@ -312,9 +320,9 @@ footer{max-width:1120px;margin:0 auto;padding:0 24px 40px;font-size:11.5px;color
       "role": "前端",
       "state": "resting",
       "task": "",
-      "since": "2026-11-17T12:14:56+08:00",
-      "joinedAt": "2026-11-17T12:14:56+08:00",
-      "lastSeen": "2026-11-17T12:14:56+08:00",
+      "since": "2026-11-17T12:17:17+08:00",
+      "joinedAt": "2026-11-17T12:17:17+08:00",
+      "lastSeen": "2026-11-17T12:17:17+08:00",
       "reports": 1,
       "note": ""
     },
@@ -327,8 +335,8 @@ footer{max-width:1120px;margin:0 auto;padding:0 24px 40px;font-size:11.5px;color
       "state": "resting",
       "task": "",
       "since": null,
-      "joinedAt": "2026-11-17T12:14:56+08:00",
-      "lastSeen": "2026-11-17T12:14:56+08:00",
+      "joinedAt": "2026-11-17T12:17:17+08:00",
+      "lastSeen": "2026-11-17T12:17:17+08:00",
       "reports": 0,
       "note": ""
     },
@@ -340,9 +348,9 @@ footer{max-width:1120px;margin:0 auto;padding:0 24px 40px;font-size:11.5px;color
       "role": "部署",
       "state": "resting",
       "task": "",
-      "since": "2026-11-17T12:14:56+08:00",
-      "joinedAt": "2026-11-17T12:14:56+08:00",
-      "lastSeen": "2026-11-17T12:14:56+08:00",
+      "since": "2026-11-17T12:17:17+08:00",
+      "joinedAt": "2026-11-17T12:17:17+08:00",
+      "lastSeen": "2026-11-17T12:17:17+08:00",
       "reports": 1,
       "note": ""
     }
@@ -352,7 +360,7 @@ footer{max-width:1120px;margin:0 auto;padding:0 24px 40px;font-size:11.5px;color
       "id": "r-0001",
       "agentId": "lumi",
       "kind": "result",
-      "time": "2026-11-17T12:14:56+08:00",
+      "time": "2026-11-17T12:17:17+08:00",
       "title": "首页骨架跑通，本地预览无报错",
       "shortGoal": "搭出首页骨架并跑通本地预览",
       "attempts": [
@@ -376,7 +384,7 @@ footer{max-width:1120px;margin:0 auto;padding:0 24px 40px;font-size:11.5px;color
       "id": "r-0002",
       "agentId": "xiaoyu",
       "kind": "progress",
-      "time": "2026-11-17T12:14:56+08:00",
+      "time": "2026-11-17T12:17:17+08:00",
       "title": "天气数据源接好了，先跑假数据",
       "shortGoal": "接入数据源并验证 7 天渲染",
       "attempts": [
@@ -400,81 +408,81 @@ footer{max-width:1120px;margin:0 auto;padding:0 24px 40px;font-size:11.5px;color
       "body": "桌面三栏 + 窄屏单列，可直接双击打开",
       "image": "",
       "addedBy": "xiaoyu",
-      "addedAt": "2026-11-17T12:14:56+08:00"
+      "addedAt": "2026-11-17T12:17:17+08:00"
     }
   ],
   "activity": [
     {
-      "time": "2026-11-17T12:14:55+08:00",
+      "time": "2026-11-17T12:17:17+08:00",
       "agentId": "",
       "event": "init",
       "text": "创建留言板"
     },
     {
-      "time": "2026-11-17T12:14:56+08:00",
+      "time": "2026-11-17T12:17:17+08:00",
       "agentId": "lumi",
       "event": "join",
       "text": "小鹿 加入项目"
     },
     {
-      "time": "2026-11-17T12:14:56+08:00",
+      "time": "2026-11-17T12:17:17+08:00",
       "agentId": "luna",
       "event": "join",
       "text": "小岚 加入项目"
     },
     {
-      "time": "2026-11-17T12:14:56+08:00",
+      "time": "2026-11-17T12:17:17+08:00",
       "agentId": "lumi",
       "event": "claim",
       "text": "小鹿 开工：搭首页骨架并跑通本地预览"
     },
     {
-      "time": "2026-11-17T12:14:56+08:00",
+      "time": "2026-11-17T12:17:17+08:00",
       "agentId": "lumi",
       "event": "report",
       "text": "r-0001 首页骨架跑通，本地预览无报错"
     },
     {
-      "time": "2026-11-17T12:14:56+08:00",
+      "time": "2026-11-17T12:17:17+08:00",
       "agentId": "lumi",
       "event": "release",
       "text": "小鹿 收工"
     },
     {
-      "time": "2026-11-17T12:14:56+08:00",
-      "agentId": "",
-      "event": "goal",
-      "text": "更新目标/里程碑"
-    },
-    {
-      "time": "2026-11-17T12:14:56+08:00",
+      "time": "2026-11-17T12:17:17+08:00",
       "agentId": "xiaoyu",
       "event": "join",
       "text": "小雨 加入项目"
     },
     {
-      "time": "2026-11-17T12:14:56+08:00",
+      "time": "2026-11-17T12:17:17+08:00",
       "agentId": "xiaoyu",
       "event": "claim",
       "text": "小雨 开工：接入天气数据源，先用假数据占位"
     },
     {
-      "time": "2026-11-17T12:14:56+08:00",
+      "time": "2026-11-17T12:17:17+08:00",
       "agentId": "xiaoyu",
       "event": "report",
       "text": "r-0002 天气数据源接好了，先跑假数据"
     },
     {
-      "time": "2026-11-17T12:14:56+08:00",
+      "time": "2026-11-17T12:17:17+08:00",
       "agentId": "xiaoyu",
       "event": "wall",
       "text": "已贴入：首页骨架 v1（w-0001）"
     },
     {
-      "time": "2026-11-17T12:14:56+08:00",
+      "time": "2026-11-17T12:17:17+08:00",
       "agentId": "xiaoyu",
       "event": "release",
       "text": "小雨 收工"
+    },
+    {
+      "time": "2026-11-17T12:17:17+08:00",
+      "agentId": "",
+      "event": "goal",
+      "text": "更新目标/里程碑"
     }
   ]
 }
@@ -578,24 +586,25 @@ var QUERY = "", DAY = "";
   /* ---------- goal ---------- */
   (function(){
     var mss = goal.milestones || [];
-    var done = mss.filter(function(m){ return m.state === "done"; }).length;
-    var pct = mss.length ? Math.round(done / mss.length * 100) : 0;
     var h = '<div class="card goal">';
     h += '<div class="tag">GOAL · 项目最终目标</div>';
     if (goal.title) h += '<h1>' + esc(goal.title) + '</h1>';
     else h += '<h1 class="empty">目标待补充：agent 需向用户确认项目最终目标后写入</h1>';
     if (goal.detail) h += '<p class="detail">' + esc(goal.detail) + '</p>';
     if (mss.length) {
-      h += '<div class="ratio"><div class="bar"><i style="width:' + pct + '%"></i></div>';
-      h += '<span>里程碑 ' + done + '/' + mss.length + ' · ' + pct + '%</span></div>';
-      h += '<div class="ms">';
-      mss.forEach(function(m, i){
+      var open = mss.filter(function(m){ return (m.state || "todo") !== "done"; });
+      var closed = mss.filter(function(m){ return m.state === "done"; });
+      function chip(m){
         var st = m.state || "todo";
         var mark = st === "done" ? "✓" : (st === "doing" ? "◐" : "○");
-        h += '<span class="m ' + esc(st) + '" title="' + (st === "done" ? "已完成" : st === "doing" ? "进行中" : "未开始") + '">' +
-             '<i>' + mark + '</i>' + esc(m.text) + '</span>';
-      });
-      h += '</div>';
+        return '<span class="m ' + esc(st) + '" title="' + (st === "done" ? "已完成" : st === "doing" ? "进行中" : "未开始") + '">' +
+               '<i>' + mark + '</i>' + esc(m.text) + '</span>';
+      }
+      if (open.length) h += '<div class="ms">' + open.map(chip).join("") + '</div>';
+      if (closed.length) {
+        h += '<details class="ms-fold"><summary>已完成 ' + closed.length + ' 项</summary>' +
+             '<div class="ms">' + closed.map(chip).join("") + '</div></details>';
+      }
     }
     var by = goal.updatedBy ? (agentOf(goal.updatedBy) ? agentOf(goal.updatedBy).name : goal.updatedBy) : "";
     if (goal.updatedAt || by) {
