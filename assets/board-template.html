@@ -446,9 +446,11 @@ var QUERY = "", DAY = "";
            (a.role ? '<span class="role">' + esc(a.role) + '</span>' : "") +
            '</div><div class="id">' + esc(a.id) +
            '<span class="sep"> · </span>' +
-           (a.harness ? '<span class="hn">' + esc(a.harness) + '</span>' : '<span class="hn none">harness未标注</span>') +
+           (a.harness ? '<span class="hn">' + esc(a.harness) + '</span>'
+                      : '<span class="hn none" title="未标注 harness，可用 meta --harness 补">harness?</span>') +
            '<span class="sep"> · </span>' +
-           (a.model ? '<span class="mdl">' + esc(a.model) + '</span>' : '<span class="mdl none">模型未标注</span>') +
+           (a.model ? '<span class="mdl">' + esc(a.model) + '</span>'
+                    : '<span class="mdl none" title="未标注模型，可用 meta --model 补">模型?</span>') +
            '</div></div>';
       h += '<span class="st ' + esc(st) + '"><i class="dot"></i>' + (STATE[st] || st) + '</span></div>';
       h += '<div class="task">' + (a.task ? esc(a.task) : '<span>无当前任务</span>') + '</div>';
