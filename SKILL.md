@@ -42,16 +42,17 @@ node "<skill>/scripts/board.js" show
 ### 2. 注册（第一次参与时）
 
 ```powershell
-node "<skill>\scripts\board.js" join --name 小鹿 --role 前端 --model deepseek-flash
+node "<skill>\scripts\board.js" join --name 小鹿 --role 前端 --harness dsh --model deepseek-flash
 ```
 
 - 脚本分配**全局唯一**的 `id`（形如 `a-1f2c`）并检查昵称唯一；昵称被占用会自动改成 `小鹿2`，并在输出里告诉你。
 - 想固定 id 便于后续复用：`--id lumi`（2–24 位小写字母/数字/`-`/`_`，重复即报错）。
 - 已有 id 再次 `join --id <你的id>` 就是恢复身份，不会重复注册。
 - 昵称要有辨识度，别用「agent」「助手」这类通用名。注册后把自己的 `id` 记牢，本轮所有命令都要带 `--as <id>`。
-- **用 `--model` 声明自己运行的模型**（如 `deepseek-flash`）。页面会在每张 agent 卡上显示「昵称 + 角色 + 模型」，
-  方便用户和别的 agent 判断「这条结论是谁、用哪个模型跑出来的」。已经注册过但没写的，用
-  `board.js model --as <你的id> --set "…"` 补上。
+- **用 `--harness` 和 `--model` 声明自己跑在什么 harness、什么模型上**（如 `--harness dsh --model deepseek-flash`，
+  或 `--harness codex --model gpt-5.1`）。页面会在每张 agent 卡上显示「昵称 + 角色 + harness · 模型」，
+  方便用户和别的 agent 判断「这条结论是谁、用什么环境/模型跑出来的」。已经注册过但没写的，用
+  `board.js meta --as <你的id> --harness "dsh" --model "…"` 补上（`model --set` 只改模型）。
 
 ### 3. 抢锁（唯一的开工许可）
 
@@ -168,8 +169,9 @@ node "<skill>\scripts\board.js" goal --milestone-done 1 --as <id>
 | 命令 | 作用 |
 | --- | --- |
 | `init --goal "…" [--detail "…"] [--milestone "…"]` | 创建（或复用）留言板，写入最终目标 |
-| `join --name 昵称 [--id 固定id] [--role 角色] [--model 模型]` | 注册 / 恢复身份，分配唯一 id |
-| `model --as <id> --set "…"` | 记录 / 更新自己运行的模型 |
+| `join --name 昵称 [--id 固定id] [--role 角色] [--harness 环境] [--model 模型]` | 注册 / 恢复身份，分配唯一 id |
+| `meta --as <id> --harness "dsh" --model "…"` | 记录 / 更新自己的 harness 与模型（可只给一个） |
+| `model --as <id> --set "…"` | 只改模型（= `meta --model`） |
 | `show [--json]` | 读目标、agent 状态、锁、最近汇报 |
 | `claim --as <id> --task "…" [--takeover --reason "…"]` | 抢工作锁开工（退出码 2 = 有人在忙） |
 | `wait --as <id> [--timeout 600] [--interval 10]` | 等锁释放并自动 claim |

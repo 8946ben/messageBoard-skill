@@ -52,6 +52,7 @@
   "emoji": "🦌",
   "color": "#7c9e6f",
   "role": "前端",
+  "harness": "dsh",
   "model": "deepseek-flash",
   "state": "working",
   "task": "把 7 天天气渲染成卡片列表",
@@ -65,8 +66,10 @@
 
 - `id` 全局唯一，2–24 位小写字母/数字/`-`/`_`；脚本默认生成 `a-1f2c` 形式。
 - `name` 唯一（大小写不敏感），脚本在重名时自动加序号。
+- `harness` 该 agent 运行在哪个 harness / 客户端（如 `dsh` / `codex` / `claude-code`），
+  注册时用 `join --harness` 声明，之后可用 `meta --as <id> --harness "…"` 改。
 - `model` 该 agent 运行的模型名（如 `deepseek-flash` / `qwen3.8-27b`），注册时用 `join --model` 声明；
-  缺省时页面显示「模型未标注」，可用 `model --as <id> --set "…"` 补。
+  缺省时页面显示「harness未标注 · 模型未标注」，可用 `meta --as <id> --model "…"` 补。
 - `state`：`working`（持有锁）/ `resting`（休息）/ `waiting`（等条件）/ `offline`（已离开）。
 - `task` 只在工作中非空；`since` 是本轮开始时间；`reports` 由脚本按汇报数回填。
 

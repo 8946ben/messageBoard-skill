@@ -362,7 +362,8 @@ const HELP = `留言板 board.js —— 多 agent 串行协作看板
     goal       维护最终目标;  --set "目标" [--detail "验收标准"] [--milestone "里程碑"]
                    [--milestone-done <序号>] [--milestone-doing <序号>]
     state      改自己的状态;  --as <id> --state resting|waiting|working|offline [--note "…"]
-    model      记录自己运行的模型;  --as <id> --set "deepseek-flash"
+    meta       记录自己运行的 harness / 模型;  --as <id> --harness "dsh" --model "deepseek-flash"
+    model      只改模型（meta 的简写）;  --as <id> --set "deepseek-flash"
     leave      离开项目（状态置为 offline 并释放锁）;  --as <id>
     validate   校验数据完整性（JSON、id 唯一、汇报归属、图片存在）
     open       用默认浏览器打开留言板
@@ -470,6 +471,7 @@ async function cmdJoin(file, args) {
       const exist = agentOf(data, wantId);
       if (exist) {
         if (args.model && args.model !== true) exist.model = String(args.model);
+        if (args.harness && args.harness !== true) exist.harness = String(args.harness);
         exist.lastSeen = nowIso();
         pushActivity(data, exist.id, "join", exist.name + " 重新上线");
         await writeData(file, data, raw);
@@ -488,6 +490,7 @@ async function cmdJoin(file, args) {
       emoji: pal.emoji,
       color: pal.color,
       role: args.role && args.role !== true ? String(args.role) : "",
+      harness: args.harness && args.harness !== true ? String(args.harness) : "",
       model: args.model && args.model !== true ? String(args.model) : "",
       state: "resting",
       task: "",
@@ -515,7 +518,8 @@ async function cmdJoin(file, args) {
     "✔ 注册成功，你的 agent 身份：\n" +
     "  id   : " + a.id + "\n" +
     "  昵称 : " + a.emoji + " " + a.name + (out.renamed ? "（你想要的昵称已被占用，自动改名）" : "") + "\n" +
-    "  模型 : " + (a.model || "（未标注，可用 model --set 补）") + "\n" +
+    "  环境 : " + (a.harness || "（未标注，可用 meta --harness 补）") + "\n" +
+    "  模型 : " + (a.model || "（未标注，可用 meta --model 补）") + "\n" +
     "  状态 : 休息中（开工前必须 claim）\n" +
     "  留言板：" + file + "\n" +
     "  下一步：board.js claim --as " + a.id + " --task \"本次短期目标\"\n"
@@ -575,7 +579,7 @@ function showText(data, file) {
     .forEach((a) => {
       L.push("   " + stateMark(a.state) + " " + (a.id + "        ").slice(0, 9) + " " +
         (a.emoji ? a.emoji + " " : "") + a.name + "  [" + stateText(a.state) + "]  汇报 " + (a.reports || 0) + " 条" +
-        "  · " + (a.model || "模型未标注") +
+        "  · " + (a.harness || "harness未标注") + " · " + (a.model || "模型未标注") +
         (a.task ? "  任务: " + a.task : ""));
     });
   L.push("");
@@ -955,20 +959,43 @@ async function cmdState(file, args) {
   process.stdout.write("✔ 状态已更新为 " + stateText(st) + "\n");
 }
 
-/* ----------------------------------------------------------------- model */
+/* ------------------------------------------------------- meta (harness/model) */
+
+async function setAgentMeta(file, id, patch) {
+  let me = null;
+  await withWriteLock(file, async () => {
+    const { data, raw } = readData(file);
+    me = mustAgent(data, id);
+    const bits = [];
+    if (patch.harness) { me.harness = patch.harness; bits.push("harness=" + patch.harness); }
+    if (patch.model) { me.model = patch.model; bits.push("model=" + patch.model); }
+    me.lastSeen = nowIso();
+    pushActivity(data, id, "meta", (me.name || id) + " " + bits.join(" "));
+    await writeData(file, data, raw);
+  });
+  return me;
+}
+
+async function cmdMeta(file, args) {
+  const id = args.as || args.id;
+  const harness = args.harness && args.harness !== true ? String(args.harness).trim() : "";
+  const model = args.model && args.model !== true ? String(args.model).trim() : "";
+  if (!harness && !model) {
+    fail('用法：board.js meta --as <id> --harness "dsh" --model "deepseek-flash"（两个至少给一个）');
+  }
+  const me = await setAgentMeta(file, id, { harness, model });
+  process.stdout.write(
+    "✔ 已记录：" + (me.name || id) + "\n" +
+    "  harness : " + (me.harness || "（未标注）") + "\n" +
+    "  模型    : " + (me.model || "（未标注）") + "\n"
+  );
+}
 
 async function cmdModel(file, args) {
   const id = args.as || args.id;
   const model = args.set && args.set !== true ? String(args.set).trim() : "";
-  if (!model) fail('用法：board.js model --as <id> --set "模型名"（例如 deepseek-flash / qwen3.8-27b）');
-  await withWriteLock(file, async () => {
-    const { data, raw } = readData(file);
-    const me = mustAgent(data, id);
-    me.model = model;
-    me.lastSeen = nowIso();
-    pushActivity(data, id, "model", (me.name || id) + " 模型 → " + model);
-    await writeData(file, data, raw);
-  });
+  if (!model) fail('用法：board.js model --as <id> --set "模型名"（= meta --model）');
+  await setAgentMeta(file, id, { model });
   process.stdout.write("✔ 模型已记录：" + model + "\n");
 }
 
@@ -1100,6 +1127,7 @@ async function main() {
     case "wall": return cmdWall(file, args);
     case "goal": return cmdGoal(file, args);
     case "state": return cmdState(file, args);
+    case "meta": return cmdMeta(file, args);
     case "model": return cmdModel(file, args);
     case "leave": return cmdLeave(file, args);
     case "validate": return cmdValidate(file);

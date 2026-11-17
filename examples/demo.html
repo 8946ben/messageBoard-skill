@@ -113,8 +113,10 @@ h2 .cnt{font-size:12px;color:var(--sub);letter-spacing:0;font-weight:400}
 .agent .nm{font-weight:700;font-size:14.5px;display:flex;align-items:center;gap:7px}
 .agent .nm .role{font-size:10.5px;font-weight:400;color:var(--sub);border:1px solid var(--line);border-radius:4px;padding:0 5px}
 .agent .id{font-size:11px;color:var(--sub);font-family:"Cascadia Code",Consolas,monospace}
+.agent .id .sep{opacity:.55}
+.agent .id .hn{color:#6b5626}
 .agent .id .mdl{color:#2b5d8a}
-.agent .id .mdl.none{color:var(--sub);opacity:.75}
+.agent .id .hn.none,.agent .id .mdl.none{color:var(--sub);opacity:.75}
 .st{margin-left:auto;font-size:11.5px;padding:2px 9px;border-radius:999px;white-space:nowrap;border:1px solid transparent;display:inline-flex;align-items:center;gap:5px}
 .st.working{color:var(--working);background:var(--working-bg);border-color:#f2cdb8}
 .st.resting{color:var(--resting);background:var(--resting-bg);border-color:#cfe3d4}
@@ -278,11 +280,11 @@ footer{max-width:1120px;margin:0 auto;padding:0 24px 40px;font-size:11.5px;color
 {
   "schema": "message-board/1",
   "project": {
-    "name": "mbdemo3",
+    "name": "hn_demo",
     "file": "留言板.html",
-    "root": "C:\\Users\\ben\\AppData\\Local\\Temp\\mbdemo3",
-    "created": "2026-11-17T13:48:38+08:00",
-    "updated": "2026-11-17T13:48:39+08:00"
+    "root": "C:\\Users\\ben\\AppData\\Local\\Temp\\hn_demo",
+    "created": "2026-11-17T14:23:53+08:00",
+    "updated": "2026-11-17T14:23:53+08:00"
   },
   "goal": {
     "title": "上线一个可用 7 天的本地天气看板",
@@ -304,7 +306,7 @@ footer{max-width:1120px;margin:0 auto;padding:0 24px 40px;font-size:11.5px;color
         "state": "todo"
       }
     ],
-    "updatedAt": "2026-11-17T13:48:39+08:00",
+    "updatedAt": "2026-11-17T14:23:53+08:00",
     "updatedBy": ""
   },
   "lock": {
@@ -320,12 +322,13 @@ footer{max-width:1120px;margin:0 auto;padding:0 24px 40px;font-size:11.5px;color
       "emoji": "🦌",
       "color": "#7c9e6f",
       "role": "前端",
+      "harness": "dsh",
       "model": "deepseek-flash",
       "state": "resting",
       "task": "",
-      "since": "2026-11-17T13:48:38+08:00",
-      "joinedAt": "2026-11-17T13:48:38+08:00",
-      "lastSeen": "2026-11-17T13:48:38+08:00",
+      "since": "2026-11-17T14:23:53+08:00",
+      "joinedAt": "2026-11-17T14:23:53+08:00",
+      "lastSeen": "2026-11-17T14:23:53+08:00",
       "reports": 1,
       "note": ""
     },
@@ -335,12 +338,13 @@ footer{max-width:1120px;margin:0 auto;padding:0 24px 40px;font-size:11.5px;color
       "emoji": "🤖",
       "color": "#7a4f9e",
       "role": "数据",
-      "model": "deepseek-v4",
+      "harness": "codex",
+      "model": "gpt-5.1",
       "state": "resting",
       "task": "",
       "since": null,
-      "joinedAt": "2026-11-17T13:48:38+08:00",
-      "lastSeen": "2026-11-17T13:48:38+08:00",
+      "joinedAt": "2026-11-17T14:23:53+08:00",
+      "lastSeen": "2026-11-17T14:23:53+08:00",
       "reports": 0,
       "note": ""
     },
@@ -350,12 +354,13 @@ footer{max-width:1120px;margin:0 auto;padding:0 24px 40px;font-size:11.5px;color
       "emoji": "🤖",
       "color": "#c2410c",
       "role": "部署",
-      "model": "qwen3.8-27b",
+      "harness": "dsh",
+      "model": "deepseek-v4",
       "state": "resting",
       "task": "",
-      "since": "2026-11-17T13:48:39+08:00",
-      "joinedAt": "2026-11-17T13:48:39+08:00",
-      "lastSeen": "2026-11-17T13:48:39+08:00",
+      "since": "2026-11-17T14:23:53+08:00",
+      "joinedAt": "2026-11-17T14:23:53+08:00",
+      "lastSeen": "2026-11-17T14:23:53+08:00",
       "reports": 1,
       "note": ""
     }
@@ -365,7 +370,7 @@ footer{max-width:1120px;margin:0 auto;padding:0 24px 40px;font-size:11.5px;color
       "id": "r-0001",
       "agentId": "lumi",
       "kind": "result",
-      "time": "2026-11-17T13:48:38+08:00",
+      "time": "2026-11-17T14:23:53+08:00",
       "title": "首页骨架跑通，本地预览无报错",
       "shortGoal": "搭出首页骨架并跑通本地预览",
       "attempts": [
@@ -389,7 +394,7 @@ footer{max-width:1120px;margin:0 auto;padding:0 24px 40px;font-size:11.5px;color
       "id": "r-0002",
       "agentId": "xiaoyu",
       "kind": "progress",
-      "time": "2026-11-17T13:48:39+08:00",
+      "time": "2026-11-17T14:23:53+08:00",
       "title": "天气数据源接好了，先跑假数据",
       "shortGoal": "接入数据源并验证 7 天渲染",
       "attempts": [
@@ -413,78 +418,78 @@ footer{max-width:1120px;margin:0 auto;padding:0 24px 40px;font-size:11.5px;color
       "body": "桌面三栏 + 窄屏单列，可直接双击打开",
       "image": "",
       "addedBy": "xiaoyu",
-      "addedAt": "2026-11-17T13:48:39+08:00"
+      "addedAt": "2026-11-17T14:23:53+08:00"
     }
   ],
   "activity": [
     {
-      "time": "2026-11-17T13:48:38+08:00",
+      "time": "2026-11-17T14:23:53+08:00",
       "agentId": "",
       "event": "init",
       "text": "创建留言板"
     },
     {
-      "time": "2026-11-17T13:48:38+08:00",
+      "time": "2026-11-17T14:23:53+08:00",
       "agentId": "lumi",
       "event": "join",
       "text": "小鹿 加入项目"
     },
     {
-      "time": "2026-11-17T13:48:38+08:00",
+      "time": "2026-11-17T14:23:53+08:00",
       "agentId": "luna",
       "event": "join",
       "text": "小岚 加入项目"
     },
     {
-      "time": "2026-11-17T13:48:38+08:00",
+      "time": "2026-11-17T14:23:53+08:00",
       "agentId": "lumi",
       "event": "claim",
       "text": "小鹿 开工：搭首页骨架并跑通本地预览"
     },
     {
-      "time": "2026-11-17T13:48:38+08:00",
+      "time": "2026-11-17T14:23:53+08:00",
       "agentId": "lumi",
       "event": "report",
       "text": "r-0001 首页骨架跑通，本地预览无报错"
     },
     {
-      "time": "2026-11-17T13:48:38+08:00",
+      "time": "2026-11-17T14:23:53+08:00",
       "agentId": "lumi",
       "event": "release",
       "text": "小鹿 收工"
     },
     {
-      "time": "2026-11-17T13:48:39+08:00",
+      "time": "2026-11-17T14:23:53+08:00",
       "agentId": "xiaoyu",
       "event": "join",
       "text": "小雨 加入项目"
     },
     {
-      "time": "2026-11-17T13:48:39+08:00",
+      "time": "2026-11-17T14:23:53+08:00",
       "agentId": "xiaoyu",
       "event": "claim",
       "text": "小雨 开工：接入天气数据源，先用假数据占位"
     },
     {
-      "time": "2026-11-17T13:48:39+08:00",
+      "time": "2026-11-17T14:23:53+08:00",
       "agentId": "xiaoyu",
       "event": "report",
       "text": "r-0002 天气数据源接好了，先跑假数据"
     },
     {
-      "time": "2026-11-17T13:48:39+08:00",
+      "time": "2026-11-17T14:23:53+08:00",
       "agentId": "xiaoyu",
       "event": "wall",
       "text": "已贴入：首页骨架 v1（w-0001）"
     },
     {
-      "time": "2026-11-17T13:48:39+08:00",
+      "time": "2026-11-17T14:23:53+08:00",
       "agentId": "xiaoyu",
       "event": "release",
       "text": "小雨 收工"
     },
     {
-      "time": "2026-11-17T13:48:39+08:00",
+      "time": "2026-11-17T14:23:53+08:00",
       "agentId": "",
       "event": "goal",
       "text": "更新目标/里程碑"
@@ -660,7 +665,10 @@ var QUERY = "", DAY = "";
       h += '<div class="who"><div class="nm">' + esc(a.name || a.id) +
            (a.role ? '<span class="role">' + esc(a.role) + '</span>' : "") +
            '</div><div class="id">' + esc(a.id) +
-           '<span class="mdl' + (a.model ? "" : " none") + '"> · ' + esc(a.model || "模型未标注") + '</span>' +
+           '<span class="sep"> · </span>' +
+           (a.harness ? '<span class="hn">' + esc(a.harness) + '</span>' : '<span class="hn none">harness未标注</span>') +
+           '<span class="sep"> · </span>' +
+           (a.model ? '<span class="mdl">' + esc(a.model) + '</span>' : '<span class="mdl none">模型未标注</span>') +
            '</div></div>';
       h += '<span class="st ' + esc(st) + '"><i class="dot"></i>' + (STATE[st] || st) + '</span></div>';
       h += '<div class="task">' + (a.task ? esc(a.task) : '<span>无当前任务</span>') + '</div>';

@@ -43,7 +43,7 @@ node <skill>/scripts/board.js init --goal "上线一个可用 7 天的本地天�
   --milestone "搭出页面骨架" --milestone "接入天气数据源" --milestone "部署上线"
 
 # 2) agent 注册（第一次参与）
-node <skill>/scripts/board.js join --name 小鹿 --role 前端
+node <skill>/scripts/board.js join --name 小鹿 --role 前端 --harness dsh --model deepseek-flash
 
 # 3) 抢工作锁，开工
 node <skill>/scripts/board.js claim --as <id> --task "搭首页骨架并跑通本地预览"
@@ -66,7 +66,7 @@ node <skill>/scripts/board.js release --as <id> --summary "骨架完成，下一
 | 命令 | 作用 |
 |---|---|
 | `init --goal "…" [--detail "…"] [--milestone "…"]` | 创建 / 复用留言板，写入最终目标 |
-| `join --name 昵称 [--id 固定id] [--role 角色]` | 注册 / 恢复身份，分配唯一 id |
+| `join --name 昵称 [--id 固定id] [--role 角色] [--harness 环境] [--model 模型]` | 注册 / 恢复身份，分配唯一 id |
 | `show [--json]` | 读目标、agent 状态、锁、最近汇报 |
 | `claim --as <id> --task "…" [--takeover --reason "…"]` | 抢工作锁（退出码 2 = 有人在忙） |
 | `wait --as <id> [--timeout 600]` | 等锁释放并自动 claim |
@@ -74,6 +74,7 @@ node <skill>/scripts/board.js release --as <id> --summary "骨架完成，下一
 | `report --as <id> --title "…" [--result/--attempt/--code/--image/--tag/--next]` | 写一条图文汇报 |
 | `goal --set/--detail/--milestone/--milestone-done/--milestone-doing` | 维护目标与里程碑 |
 | `wall --add "标题::说明::图片"` / `wall --remove <id>` / `wall --list` | 展示墙增删（仅按用户明确指令） |
+| `meta --harness "dsh" --model "deepseek-flash"` | 记录自己跑在什么 harness / 模型上（卡片会显示） |
 | `state` / `leave` / `validate` / `open` / `path` | 状态、离开、校验、打开、打印路径 |
 
 ## 汇报的两条约定
