@@ -113,6 +113,8 @@ h2 .cnt{font-size:12px;color:var(--sub);letter-spacing:0;font-weight:400}
 .agent .nm{font-weight:700;font-size:14.5px;display:flex;align-items:center;gap:7px}
 .agent .nm .role{font-size:10.5px;font-weight:400;color:var(--sub);border:1px solid var(--line);border-radius:4px;padding:0 5px}
 .agent .id{font-size:11px;color:var(--sub);font-family:"Cascadia Code",Consolas,monospace}
+.agent .id .mdl{color:#2b5d8a}
+.agent .id .mdl.none{color:var(--sub);opacity:.75}
 .st{margin-left:auto;font-size:11.5px;padding:2px 9px;border-radius:999px;white-space:nowrap;border:1px solid transparent;display:inline-flex;align-items:center;gap:5px}
 .st.working{color:var(--working);background:var(--working-bg);border-color:#f2cdb8}
 .st.resting{color:var(--resting);background:var(--resting-bg);border-color:#cfe3d4}
@@ -440,7 +442,9 @@ var QUERY = "", DAY = "";
       h += '<div class="hd"><div class="ava" style="--c:' + c + '">' + esc(a.emoji || "🤖") + '</div>';
       h += '<div class="who"><div class="nm">' + esc(a.name || a.id) +
            (a.role ? '<span class="role">' + esc(a.role) + '</span>' : "") +
-           '</div><div class="id">' + esc(a.id) + '</div></div>';
+           '</div><div class="id">' + esc(a.id) +
+           '<span class="mdl' + (a.model ? "" : " none") + '"> · ' + esc(a.model || "模型未标注") + '</span>' +
+           '</div></div>';
       h += '<span class="st ' + esc(st) + '"><i class="dot"></i>' + (STATE[st] || st) + '</span></div>';
       h += '<div class="task">' + (a.task ? esc(a.task) : '<span>无当前任务</span>') + '</div>';
       var items = [];
