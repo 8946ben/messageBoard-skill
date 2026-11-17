@@ -1,0 +1,10 @@
+# OS / editor junk
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.tmp
+
+# a board's live lock file (never commit, it is per-machine state)
+.留言板.lock

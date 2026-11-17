@@ -1,0 +1,4 @@
+interface:
+  display_name: "多 Agent 留言板"
+  short_description: "用留言板.html 串起多 agent 协作：目标对齐、唯一身份、串行工作锁、图文汇报"
+  default_prompt: "Use $agent-message-board to 在项目根维护留言板.html 并按串行工作锁协作"
